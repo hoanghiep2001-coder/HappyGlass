@@ -1,0 +1,62 @@
+
+evo_skin08.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L_ear
+  rotate: false
+  xy: 258, 582
+  size: 40, 50
+  orig: 40, 50
+  offset: 0, 0
+  index: -1
+L_hand
+  rotate: false
+  xy: 523, 606
+  size: 274, 170
+  orig: 274, 170
+  offset: 0, 0
+  index: -1
+L_leg
+  rotate: false
+  xy: 523, 778
+  size: 132, 166
+  orig: 132, 166
+  offset: 0, 0
+  index: -1
+R_ear
+  rotate: false
+  xy: 215, 586
+  size: 41, 46
+  orig: 41, 46
+  offset: 0, 0
+  index: -1
+R_hand
+  rotate: false
+  xy: 776, 793
+  size: 168, 151
+  orig: 168, 151
+  offset: 0, 0
+  index: -1
+R_leg
+  rotate: false
+  xy: 657, 779
+  size: 117, 165
+  orig: 117, 165
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 634
+  size: 519, 310
+  orig: 519, 310
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 2, 440
+  size: 211, 192
+  orig: 211, 192
+  offset: 0, 0
+  index: -1
