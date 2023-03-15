@@ -16,23 +16,12 @@ const Overlay = cc.Class({
         completeText: cc.Node,
         logo: cc.Node,
         button: cc.Node,
-        startOverlay: false,
     },
 
     onLoad () {     
-       if(this.startOverlay) {
-        this.onStartOverlay();
-       }
-    },
-
-    onStartOverlay() {
         this.hanldeMoveStar(-47, 95, this.star1, 0.8, 0.6);
         this.hanldeMoveStar(0, 100, this.star2, 0.8, 1.2);
         this.hanldeMoveStar(47, 95, this.star3, 0.8, 1.8);
-    },
-
-    init(onStart) {
-        this.startOverlay = onStart;
     },
 
     hanldeMoveStar(x = 0, y = 0, object, duration = 0) {
@@ -49,6 +38,4 @@ const Overlay = cc.Class({
         const moveAction = cc.moveTo(duration, position);
         object.runAction(moveAction);
     },
-
-    // update (dt) {},
 });

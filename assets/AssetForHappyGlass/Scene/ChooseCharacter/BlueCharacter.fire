@@ -81,9 +81,6 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 27
-      },
-      {
         "__id__": 28
       },
       {
@@ -91,6 +88,9 @@
       },
       {
         "__id__": 30
+      },
+      {
+        "__id__": 31
       }
     ],
     "_prefab": null,
@@ -621,6 +621,9 @@
     "_components": [
       {
         "__id__": 26
+      },
+      {
+        "__id__": 27
       }
     ],
     "_prefab": null,
@@ -1248,6 +1251,25 @@
     "_id": "a0GU8KV9xBCa7TVEjF9/lW"
   },
   {
+    "__type__": "81cbdXsyARB/oOqDT6hw4Wi",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 13
+    },
+    "_enabled": true,
+    "thisCup": null,
+    "startPos": null,
+    "graphics": null,
+    "playText": null,
+    "lineGuide": null,
+    "dotDefault": null,
+    "character": null,
+    "transformCharacter": null,
+    "overlay": null,
+    "_id": "8bDdiUe0ZMlLTITU4ON5Jv"
+  },
+  {
     "__type__": "cc.Canvas",
     "_name": "",
     "_objFlags": 0,
@@ -1321,8 +1343,6 @@
       "__id__": 2
     },
     "_enabled": true,
-    "blueCup": null,
-    "redCup": null,
     "_id": "1frgIiBhpHSIDUeG6HyML4"
   }
 ]

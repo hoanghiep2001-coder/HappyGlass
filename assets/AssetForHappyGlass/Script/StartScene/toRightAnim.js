@@ -50,11 +50,26 @@ cc.Class({
     // load scene when choose character
     _this.on("touchend", () => {
       AudioManager.playclickMusicMusic();
-      if(self.name === "BlueCup<toRightAnim>") {
-        cc.director.loadScene("BlueCharacter");
 
-      } else {
-        cc.director.loadScene("BlueCharacterLv1");
+      const parent = _this.parent;
+      if(parent.name === "Level") {
+        const Game = parent.getComponent("Game");
+        Game.handleRecognizeCup(self.name);
+      }
+
+      switch (self.name) {
+        case "BlueCup<toRightAnim>":
+          cc.director.loadScene("BlueCharacter");
+          break;
+        case "Level01<toRightAnim>":
+          cc.director.loadScene("BlueCharacterLv1");
+          break;
+        case "Level01-Red<toRightAnim>":
+          cc.director.loadScene("RedCharacterLv1");
+          break;
+        default:
+          console.log("Invalid Node")
+          break;
       }
     });
   },

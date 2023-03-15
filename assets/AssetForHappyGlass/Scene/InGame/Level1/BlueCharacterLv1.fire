@@ -1408,8 +1408,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        1259,
-        -1679,
+        0,
+        0,
         0,
         0,
         0,
@@ -1478,7 +1478,7 @@
         "__id__": 30
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 59
@@ -3085,6 +3085,9 @@
     },
     "transformCharacter": {
       "__id__": 22
+    },
+    "overlay": {
+      "__id__": 29
     },
     "_id": "10Y88GOJpEr4EQKpFTgbMB"
   }

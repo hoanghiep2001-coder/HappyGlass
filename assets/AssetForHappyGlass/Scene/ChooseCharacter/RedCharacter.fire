@@ -81,9 +81,6 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 27
-      },
-      {
         "__id__": 28
       },
       {
@@ -91,6 +88,9 @@
       },
       {
         "__id__": 30
+      },
+      {
+        "__id__": 31
       }
     ],
     "_prefab": null,
@@ -621,6 +621,9 @@
     "_components": [
       {
         "__id__": 26
+      },
+      {
+        "__id__": 27
       }
     ],
     "_prefab": null,
@@ -673,7 +676,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Level01",
+    "_name": "Level01-Red",
     "_objFlags": 0,
     "_parent": {
       "__id__": 13
@@ -950,7 +953,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Level02",
+    "_name": "Level02-Red",
     "_objFlags": 0,
     "_parent": {
       "__id__": 13
@@ -1246,6 +1249,25 @@
       "__id__": 20
     },
     "_id": "b0KYfkfwBL+q7aUFeOpZZD"
+  },
+  {
+    "__type__": "81cbdXsyARB/oOqDT6hw4Wi",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 13
+    },
+    "_enabled": true,
+    "thisCup": null,
+    "startPos": null,
+    "graphics": null,
+    "playText": null,
+    "lineGuide": null,
+    "dotDefault": null,
+    "character": null,
+    "transformCharacter": null,
+    "overlay": null,
+    "_id": "adlYJdkwREWqOXRfxcyrAg"
   },
   {
     "__type__": "cc.Canvas",

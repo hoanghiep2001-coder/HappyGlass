@@ -13,7 +13,6 @@ cc.Class({
     },
 
     onLoad () {
-
         const canvas = cc.find("Canvas");
         const AudioManager = canvas.getComponent("AudioManager");
         AudioManager.playBackgroundMusic();

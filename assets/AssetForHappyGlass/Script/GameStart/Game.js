@@ -4,8 +4,10 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
-cc.Class({
+let clickedObject = null;
+let initCharacter = null;
+let initLevel = null;
+const Game = cc.Class({
   extends: cc.Component,
   properties: {
     thisCup: cc.Node,
@@ -16,9 +18,10 @@ cc.Class({
     dotDefault: cc.Node,
     character: cc.Node,
     transformCharacter: cc.Node,
+    overlay: cc.Node,
   },
 
-  start() {
+  onLoad() {
     this.transformCharacter.opacity = 0;
     this.dotDefault._components._animationName = "Level01_idle";
     this.handleTouchMove();
@@ -39,24 +42,25 @@ cc.Class({
     cc.Canvas.instance.node.on(
       cc.Node.EventType.TOUCH_MOVE,
       (e) => {
-        this.graphics.lineWidth = 10;
-        this.graphics.strokeColor = cc.Color.WHITE;
-        this.graphics.moveTo(
-          this.startPos.x - cc.winSize.width / 2,
-          this.startPos.y - cc.winSize.height / 2
+        _this.graphics.lineWidth = 10;
+        _this.graphics.strokeColor = cc.Color.WHITE;
+        _this.graphics.moveTo(
+          _this.startPos.x - cc.winSize.width / 2,
+          _this.startPos.y - cc.winSize.height / 2
         );
-        this.graphics.lineTo(
+        _this.graphics.lineTo(
           e.touch.getLocation().x - cc.winSize.width / 2,
           e.touch.getLocation().y - cc.winSize.height / 2
         );
+        _this.startPos = e.touch.getLocation();
+        _this.graphics.stroke();
 
-        this.startPos = e.touch.getLocation();
-        this.graphics.stroke();
+          console.log(_this.startPos)
 
         _this.lineGuide.opacity = 0;
         _this.playText.opacity = 0;
       },
-      this
+      _this
     );
 
     // event fire when user take off hand of the screen
@@ -66,38 +70,89 @@ cc.Class({
       const AudioManager = canvas.getComponent("AudioManager");
       AudioManager.playwaterDropMusicMusic();
 
+      // all Res is okay. Now run game
+      _this.setupLevel(initCharacter, initLevel, true);
+    });
+  },
+
+  setupLevel(character = "", level = 0, onPlay = false) {
+    initCharacter = character;
+    initLevel = level;
+
+    const runGame = (
+      animName,
+      character_defaultAnim,
+      character_transformedAnim,
+    ) => {
       // set water drop anim
-      const dotSkeleton = _this.dotDefault.getComponent("sp.Skeleton");
-      dotSkeleton.setAnimation(0, "Level01_play", false);
+      const dotSkeleton = this.dotDefault.getComponent("sp.Skeleton");
+      dotSkeleton.setAnimation(0, animName, false);
 
       // delete the graphics stroke
-      _this.graphics.clear(true);
+      this.graphics.clear(true);
 
       // make a sequenceAction after 1.4s
       const handleArgs = () => {
-        _this.character.opacity = 0;
-        _this.thisCup.opacity = 0;
-        _this.transformCharacter.opacity = 255;
+        this.character.opacity = 0;
+        this.thisCup.opacity = 0;
+        this.transformCharacter.opacity = 255;
       };
-      _this.makeSequenceAction(
-        _this,
-        _this.transformCharacter,
+      this.makeSequenceAction(
+        this,
+        this.transformCharacter,
         1.4,
-        "tranform",
+        character_defaultAnim,
         false,
         handleArgs
       );
 
       // make infinite anim for transformed character
-      _this.makeSequenceAction(
-        _this,
-        _this.transformCharacter,
-        2.8,
-        "cell_flex",
+      this.makeSequenceAction(
+        this,
+        this.transformCharacter,
+        3,
+        character_transformedAnim,
         true,
         null
       );
-    });
+
+      // open overlay when character transformed
+      const handleOpenOverlay = () => {
+        this.overlay.active = true;
+      };
+      this.makeSequenceAction(this, null, 3, null, false, handleOpenOverlay);
+    };
+
+    if (character === "Blue" && level === 1 && onPlay === true) {
+      runGame("Level01_play", "tranform", "cell_flex");
+    } else if (character === "Blue" && level === 2 && onPlay === true) {
+      runGame("Level02_play", "tranform", "cell_flex");
+    } else if (character === "Red" && level === 1 && onPlay === true) {
+      runGame("Level01_play", "tranform", "cell_flex");
+    } else if (character === "Red" && level === 2 && onPlay === true) {
+      runGame("Level02_play", "tranform", "cell_flex");
+    }
+  },
+
+  handleRecognizeCup(cupName) {
+    clickedObject = cupName;
+    console.log(cupName);
+    switch (clickedObject) {
+      case "Level01<toRightAnim>":
+        this.setupLevel("Blue", 1);
+        break;
+      case "Level02<toLeftAnim>":
+        this.setupLevel("Blue", 2);
+        break;
+      case "Level01-Red<toRightAnim>":
+        this.setupLevel("Red", 1);
+        break;
+      case "Level02-Red<toLeftAnim>":
+        this.setupLevel("Red", 2);
+        break;
+      default:
+        break;
+    }
   },
 
   makeSequenceAction(
@@ -109,12 +164,17 @@ cc.Class({
     callback = function () {}
   ) {
     const delayTime = cc.delayTime(delay);
-    const prefab = character.getComponent("sp.Skeleton");
+    let prefab;
+    if (character) {
+      prefab = character.getComponent("sp.Skeleton");
+    }
     const callFuncAction = cc.callFunc(function () {
       if (callback) {
         callback();
       }
-      prefab.setAnimation(0, animType, loop);
+      if (character) {
+        prefab.setAnimation(0, animType, loop);
+      }
     }, ccNode);
 
     const sequenceAction = cc.sequence(delayTime, callFuncAction);
